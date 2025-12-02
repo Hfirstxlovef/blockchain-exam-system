@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+*.DS_Store
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Java
+target/
+*.class
+*.jar
+*.war
+
+# Logs
+logs/
+*.log
+*.log.*
+*.gz
+
+# Uploads
+uploads/
+
+# Temp
+*.tmp
+*.temp
+*.swp
+
+# Archives
+*.zip
+*.tar.gz
+*.rar
+
+# Credentials
+*.pem
+*.key
+application-prod.yml

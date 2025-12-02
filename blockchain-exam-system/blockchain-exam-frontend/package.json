@@ -1,0 +1,31 @@
+{
+  "name": "exam-approval-frontend",
+  "version": "1.0.0",
+  "description": "试卷审批系统前端 - 网络信息安全大作业",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.0",
+    "axios": "^1.6.2",
+    "crypto-js": "^4.2.0",
+    "dayjs": "^1.11.10",
+    "element-plus": "^2.5.0",
+    "js-md5": "^0.8.3",
+    "jsencrypt": "^3.3.2",
+    "nprogress": "^0.2.0",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.0",
+    "vue-router": "^4.2.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.0",
+    "sass": "^1.69.5",
+    "unplugin-auto-import": "^0.17.3",
+    "unplugin-vue-components": "^0.26.0",
+    "vite": "^7.2.4"
+  }
+}

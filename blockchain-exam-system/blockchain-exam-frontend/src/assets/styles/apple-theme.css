@@ -1,0 +1,331 @@
+/**
+ * Apple 高雅白 UI 设计系统
+ * Elegant White Theme for Blockchain Exam System
+ *
+ * 设计原则：
+ * - 纯白/浅灰背景，营造干净通透感
+ * - 极简设计，大量留白
+ * - 细腻阴影，精致圆角
+ * - 优雅过渡动画
+ */
+
+/* ========== CSS 变量定义 ========== */
+:root {
+  /* 背景色系统 */
+  --apple-white: #fbfbfd;
+  --apple-gray-1: #f5f5f7;
+  --apple-gray-2: #e8e8ed;
+  --apple-gray-3: #d2d2d7;
+  --apple-gray-4: #c7c7cc;
+  --apple-border: rgba(0, 0, 0, 0.08);
+  --apple-border-light: rgba(0, 0, 0, 0.04);
+
+  /* 文字色系统 */
+  --apple-text-primary: #1d1d1f;
+  --apple-text-secondary: #6e6e73;
+  --apple-text-tertiary: #86868b;
+  --apple-text-quaternary: #aeaeb2;
+
+  /* 品牌色 */
+  --apple-blue: #0071e3;
+  --apple-blue-hover: #0077ed;
+  --apple-blue-light: rgba(0, 113, 227, 0.1);
+  --apple-green: #34c759;
+  --apple-orange: #ff9500;
+  --apple-red: #ff3b30;
+  --apple-purple: #af52de;
+
+  /* 间距系统 (8px基准) */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+
+  /* 阴影系统 */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 32px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.06);
+
+  /* 圆角系统 */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* 字体系统 */
+  --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* 动画系统 */
+  --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 0.15s;
+  --duration-base: 0.3s;
+  --duration-slow: 0.5s;
+}
+
+/* ========== 全局样式重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-apple);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--apple-text-primary);
+  background-color: var(--apple-gray-1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========== Element Plus 主题覆盖 ========== */
+
+/* 按钮 */
+.el-button--primary {
+  background-color: var(--apple-blue) !important;
+  border-color: var(--apple-blue) !important;
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.el-button--primary:hover {
+  background-color: var(--apple-blue-hover) !important;
+  border-color: var(--apple-blue-hover) !important;
+  transform: translateY(-1px);
+}
+
+.el-button--default {
+  border-radius: var(--radius-sm);
+  border-color: var(--apple-gray-3);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.el-button--default:hover {
+  color: var(--apple-blue);
+  border-color: var(--apple-blue);
+  background-color: var(--apple-blue-light);
+}
+
+/* 输入框 */
+.el-input__wrapper {
+  border-radius: var(--radius-sm) !important;
+  box-shadow: none !important;
+  border: 1px solid var(--apple-gray-3) !important;
+  transition: all var(--duration-base) var(--ease-out) !important;
+}
+
+.el-input__wrapper:hover {
+  border-color: var(--apple-gray-4) !important;
+}
+
+.el-input__wrapper.is-focus {
+  border-color: var(--apple-blue) !important;
+  box-shadow: 0 0 0 3px var(--apple-blue-light) !important;
+}
+
+/* 卡片 */
+.el-card {
+  border-radius: var(--radius-lg) !important;
+  border: 0.5px solid var(--apple-border) !important;
+  box-shadow: var(--shadow-card) !important;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.el-card:hover {
+  box-shadow: var(--shadow-card-hover) !important;
+}
+
+/* 表格 */
+.el-table {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.el-table th.el-table__cell {
+  background-color: var(--apple-gray-1) !important;
+  color: var(--apple-text-secondary);
+  font-weight: var(--font-weight-medium);
+  border-bottom: 1px solid var(--apple-gray-2) !important;
+}
+
+.el-table td.el-table__cell {
+  border-bottom: 1px solid var(--apple-gray-2) !important;
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell {
+  background-color: var(--apple-blue-light) !important;
+}
+
+/* 标签 */
+.el-tag {
+  border-radius: var(--radius-full);
+  border: none;
+  font-weight: var(--font-weight-medium);
+}
+
+.el-tag--success {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--apple-green);
+}
+
+.el-tag--warning {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: var(--apple-orange);
+}
+
+.el-tag--danger {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--apple-red);
+}
+
+.el-tag--info {
+  background-color: var(--apple-gray-2);
+  color: var(--apple-text-secondary);
+}
+
+/* 对话框 */
+.el-dialog {
+  border-radius: var(--radius-xl) !important;
+  overflow: hidden;
+}
+
+.el-dialog__header {
+  border-bottom: 1px solid var(--apple-gray-2);
+  padding: var(--spacing-sm) var(--spacing-md) !important;
+}
+
+.el-dialog__title {
+  font-weight: var(--font-weight-semibold);
+  color: var(--apple-text-primary);
+}
+
+/* 消息框 */
+.el-message {
+  border-radius: var(--radius-md) !important;
+  border: none !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+/* 下拉菜单 */
+.el-dropdown-menu {
+  border-radius: var(--radius-md) !important;
+  border: 0.5px solid var(--apple-border) !important;
+  box-shadow: var(--shadow-lg) !important;
+  padding: var(--spacing-xs) !important;
+}
+
+.el-dropdown-menu__item {
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.el-dropdown-menu__item:hover {
+  background-color: var(--apple-blue-light);
+  color: var(--apple-blue);
+}
+
+/* 分页 */
+.el-pagination {
+  justify-content: center;
+}
+
+.el-pagination .el-pager li {
+  border-radius: var(--radius-sm);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.el-pagination .el-pager li.is-active {
+  background-color: var(--apple-blue) !important;
+}
+
+/* 面包屑 */
+.el-breadcrumb__item .el-breadcrumb__inner {
+  color: var(--apple-text-tertiary);
+  font-weight: var(--font-weight-regular);
+}
+
+.el-breadcrumb__item:last-child .el-breadcrumb__inner {
+  color: var(--apple-text-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ========== 通用工具类 ========== */
+.apple-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  border: 0.5px solid var(--apple-border);
+  box-shadow: var(--shadow-card);
+  padding: var(--spacing-md);
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.apple-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.apple-title {
+  font-size: 24px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--apple-text-primary);
+  letter-spacing: -0.5px;
+}
+
+.apple-subtitle {
+  font-size: 15px;
+  color: var(--apple-text-secondary);
+  font-weight: var(--font-weight-regular);
+}
+
+.apple-text-secondary {
+  color: var(--apple-text-secondary);
+}
+
+.apple-text-tertiary {
+  color: var(--apple-text-tertiary);
+}
+
+/* ========== 滚动条美化 ========== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--apple-gray-3);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--apple-gray-4);
+}
+
+/* ========== 选中文字样式 ========== */
+::selection {
+  background-color: var(--apple-blue-light);
+  color: var(--apple-blue);
+}

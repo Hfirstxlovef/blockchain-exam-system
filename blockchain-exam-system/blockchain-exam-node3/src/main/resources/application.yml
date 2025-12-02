@@ -1,0 +1,146 @@
+server:
+  port: 58083
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: exam-approval-system
+
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blockchain_exam_system?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: sunbuyang123  # 数据库密码
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  # Jackson配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.exam.approval.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT配置
+jwt:
+  secret: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyZQEJKp  # RSA私钥，实际使用时替换
+  expiration: 7200000  # 2小时
+  header: Authorization
+  prefix: Bearer
+
+# 加密配置
+crypto:
+  # AES主密钥（实际部署时从环境变量获取）
+  master-key: 6SkNoVaK90x6FvssC9w89s0cx5UniQ47xLHRkwmoFXI=
+  # RSA密钥长度
+  rsa-key-size: 2048
+  # AES密钥长度
+  aes-key-size: 256
+  # 系统RSA密钥对（用于登录密码加密）
+  system-rsa:
+    public-key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs2QdSMyTgB+AH5GhLyzYP7btJGJuUxTJXl/wINDUZ+YF1ZLuJ9kW3MS+EFxHl9nEiaa2G5l4+cNJUTbaLX30WyxXx5T+YWKMDgk/wNBDITvu9kbCmjkwrc2JQQAyUOdnT9zKeREZJ1LqR/PM2SYiemQ7Z8Q2Abx9aUqh3fR9t8vY7wWbctZHNJFde2hb3k29YwV4OERO3eAGXa9HXWs96Q1PzpTGgassGocLtv2X52fOreZ5FAYInwlqPM6scGHmXAHdJ7CxucaNVbWzI/mJaktry0OwKJe+wBhuMDLPjuLL8MCRK8tE0VoVuCGpvkw/DFDwxQUg1a5pzeKbS9gIHwIDAQAB
+    private-key: MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCzZB1IzJOAH4AfkaEvLNg/tu0kYm5TFMleX/Ag0NRn5gXVku4n2RbcxL4QXEeX2cSJprYbmXj5w0lRNtotffRbLFfHlP5hYowOCT/A0EMhO+72RsKaOTCtzYlBADJQ52dP3Mp5ERknUupH88zZJiJ6ZDtnxDYBvH1pSqHd9H23y9jvBZty1kc0kV17aFveTb1jBXg4RE7d4AZdr0ddaz3pDU/OlMaBqywahwu2/ZfnZ86t5nkUBgifCWo8zqxwYeZcAd0nsLG5xo1VtbMj+YlqS2vLQ7Aol77AGG4wMs+O4svwwJEry0TRWhW4Iam+TD8MUPDFBSDVrmnN4ptL2AgfAgMBAAECggEALYrXHGpDcB2PK3SPVSivZc2M+tW6aIE4dispDUu3AQGWrZf1ukwUz8tq7UBgNJ7mlIOsa+lUmyQG8wVX8oCtjo/9YP/kbNjV8aJLeynkQQW0LvXb5cdrIlSx6byhCYUV52KITKAYoLEeJVIxyVczHZtgsYFQrLQrqpV17qFpYUWEZ+x7AoCT0KyZg179tLL1eV3dCOeZo1Q9nzSYxOtSRjusrZF0nR7FeC4rKxLEDeGCiMKZh/18oqNaLB6Cy8tDlIsfAHd4ir1kQGd/WOtdJPrsPXIcv9BsJhAfWIhcPcILmcojW+31dIMWcjsT0AE+UzWxjW7moG2ODnaCysg70QKBgQDWhvGVIgdfxYJG87QaoYIwlQwlvm76Y+i76BE0CJU5QX/atu1swVAq3D7zDNgfwdxWA+6zzzTXTnUUyCp6F9tcaNvKZF1ow4TNWFZ7u19Yq6jE3Jnse+P0A1SCc79qP9Xv2L9xtvk1jj5pZzabSsl+BvRjJsfuUzTi4QseEWDB3QKBgQDWEkUIFdqIBLtp3RdbnVmwAPmP6uoARHQnHCBeVRyP6Ks7SB54RO9KYDrP/ZqDH2WdP7EE5e21ou2QFhDPnx4izUmH3D5/bUG8Fa+45Ql+v648FT85uIBHVFk9fV7rehje/SymHhzoqmeLXmdwoYfjU2bCEZGrBttohW+ceUnYKwKBgE/Aoxc6K1ujZadS+mXcHTZKctWlUkSr193jjGG3vyImA44f62w/AbqtXomlAMPtoigoFhmqso5IkKZFM+Vn8RkNsogvf7pu1XQxnxUot22Tg46MJH0SIdCZXFWTClpJmRMtlR6FU2hhlTpCML7Sss2zcC9cP3+OV17xItzuwPXRAoGBAJhWBfPcAVgb7fZG1DFoxwMdnnqQ1BZ+oB2YwVv/u0SZcQjNqIkznQlTc2bBdKvsstX1FhaDPOat29pWKX5mH/7qEXJyA7OQX1/mGtc7fcdJxkaRZB3CMt8PojXEusBdccd1aMmJ0k6rvOWLt5aKDHZzykM+V2faiFZX5nX2RdtjAoGAD4lKvzBsh6n2Pu26h3QMmWDQ30JBIzB35xI25NRHiAj3hDSgtBSnqRIUwoV3pvcf7WMhSYsWNfVF7Hh+9ONOXe6q70Ov3BdAtqiY2n0LEzkcr3P1IwXixyi2tyxi8AimPkKETa8+Lwv+b40qtKZVU4ANL9nghwN+xfeynjPiAco=
+
+# 文件存储路径
+file:
+  upload-dir: ./uploads/
+  max-size: 52428800  # 50MB
+
+# 安全配置
+security:
+  # 防重放攻击时间窗口（毫秒）
+  replay-time-window: 300000  # 5分钟
+  # 限流配置
+  rate-limit:
+    login: 5  # 登录接口每分钟5次
+    api: 100  # 普通接口每分钟100次
+
+# Knife4j API文档配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+
+# Jasypt加密配置
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD:exam-approval-secret}
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.exam.approval: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: ./logs/exam-approval.log
+    max-size: 10MB
+    max-history: 30
+
+# P2P 节点配置
+p2p:
+  node:
+    id: node3
+    name: 区块链节点3
+
+# 区块链配置
+blockchain:
+  table-name: blockchain_block
+  pool-table: blockchain_transaction
+  difficulty: 4
+  mining-interval: 30000
+  sync-interval: 60000

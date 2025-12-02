@@ -1,0 +1,153 @@
+server:
+  port: 58082
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: blockchain-exam-node2
+
+  # 数据源配置
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blockchain_exam_system?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: sunbuyang123
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 20
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: SELECT 1
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 1  # 使用不同的Redis数据库
+    timeout: 5000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  # 文件上传配置
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+  # Jackson配置
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+    serialization:
+      write-dates-as-timestamps: false
+
+# MyBatis-Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.blockchain.exam.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# JWT配置
+jwt:
+  secret: blockchain-exam-system-jwt-secret-key-node2
+  expiration: 7200000  # 2小时
+  header: Authorization
+  prefix: Bearer
+
+# 加密配置（简化版）
+crypto:
+  # AES主密钥
+  master-key: 6SkNoVaK90x6FvssC9w89s0cx5UniQ47xLHRkwmoFXI=
+  # RSA密钥长度（简化为1024）
+  rsa-key-size: 1024
+  # AES密钥长度（简化为128）
+  aes-key-size: 128
+  # 系统RSA密钥对（需要重新生成1024位的密钥）
+  system-rsa:
+    public-key: TO_BE_GENERATED
+    private-key: TO_BE_GENERATED
+
+# P2P配置
+p2p:
+  node:
+    id: node2
+    name: 软件工程系节点
+    host: localhost
+    port: 58082
+  peers:
+    - id: node1
+      url: http://localhost:58080/api
+    - id: node3
+      url: http://localhost:58083/api
+
+# 区块链配置
+blockchain:
+  table-name: node2_blockchain
+  pool-table: node2_block_pool
+  difficulty: 4
+  mining-interval: 30000  # 30秒挖矿一次
+  sync-interval: 60000    # 60秒同步一次
+
+# 文件存储路径
+file:
+  upload-dir: ./uploads/node2/
+  max-size: 52428800  # 50MB
+
+# 安全配置
+security:
+  # 防重放攻击时间窗口（毫秒）
+  replay-time-window: 300000  # 5分钟
+  # 限流配置
+  rate-limit:
+    login: 5  # 登录接口每分钟5次
+    api: 100  # 普通接口每分钟100次
+
+# Knife4j API文档配置
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    enable-swagger-models: true
+    enable-document-manage: true
+    swagger-model-name: 实体类列表
+
+# Jasypt加密配置
+jasypt:
+  encryptor:
+    password: ${JASYPT_ENCRYPTOR_PASSWORD:blockchain-exam-node2-secret}
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.blockchain.exam: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{50} - %msg%n"
+  file:
+    name: ./logs/node2/blockchain-exam-node2.log
+    max-size: 10MB
+    max-history: 30
