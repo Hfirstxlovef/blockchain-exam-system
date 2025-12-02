@@ -234,3 +234,11 @@ MIT License
 ---
 
 > 网络信息安全课程大作业 | 区块链 + 密码学技术综合实践
+<img width="3024" height="1654" alt="image" src="https://github.com/user-attachments/assets/71eac989-ebc4-4497-99e7-87cf01420f30" />
+<img width="3024" height="1654" alt="image" src="https://github.com/user-attachments/assets/efd43bc3-7dd7-4a30-9df0-5b2328562d5f" />
+<img width="3024" height="1654" alt="image" src="https://github.com/user-attachments/assets/897e6939-5911-4c9c-9621-4d8a9bb1d2a3" />
+<img width="3024" height="1654" alt="image" src="https://github.com/user-attachments/assets/7cc0bed1-d752-4341-ae64-0136b5d573c0" />
+<img width="3024" height="1654" alt="image" src="https://github.com/user-attachments/assets/a36d768c-8ac9-42e4-88ff-9e57ce125df8" />
+
+
+
